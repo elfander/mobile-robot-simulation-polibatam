@@ -1,0 +1,1134 @@
+<sdf version='1.7'>
+  <world name='default'>
+    <light name='sun' type='directional'>
+      <cast_shadows>1</cast_shadows>
+      <pose>0 0 10 0 -0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.2 0.2 0.2 1</specular>
+      <attenuation>
+        <range>1000</range>
+        <constant>0.9</constant>
+        <linear>0.01</linear>
+        <quadratic>0.001</quadratic>
+      </attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+      <spot>
+        <inner_angle>0</inner_angle>
+        <outer_angle>0</outer_angle>
+        <falloff>0</falloff>
+      </spot>
+    </light>
+    <model name='ground_plane'>
+      <static>1</static>
+      <link name='link'>
+        <collision name='collision'>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <surface>
+            <contact>
+              <collide_bitmask>65535</collide_bitmask>
+              <ode/>
+            </contact>
+            <friction>
+              <ode>
+                <mu>100</mu>
+                <mu2>50</mu2>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='visual'>
+          <cast_shadows>0</cast_shadows>
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>100 100</size>
+            </plane>
+          </geometry>
+          <material>
+            <script>
+              <uri>file://media/materials/scripts/gazebo.material</uri>
+              <name>Gazebo/Grey</name>
+            </script>
+          </material>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+    </model>
+    <gravity>0 0 -9.8</gravity>
+    <magnetic_field>6e-06 2.3e-05 -4.2e-05</magnetic_field>
+    <atmosphere type='adiabatic'/>
+    <physics type='ode'>
+      <max_step_size>0.001</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>1000</real_time_update_rate>
+    </physics>
+    <scene>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.7 0.7 0.7 1</background>
+      <shadows>1</shadows>
+    </scene>
+    <wind/>
+    <spherical_coordinates>
+      <surface_model>EARTH_WGS84</surface_model>
+      <latitude_deg>0</latitude_deg>
+      <longitude_deg>0</longitude_deg>
+      <elevation>0</elevation>
+      <heading_deg>0</heading_deg>
+    </spherical_coordinates>
+    <model name='mobile_manipulator'>
+      <link name='base_link'>
+        <inertial>
+          <pose>0.003087 0 0.053306 0 -0 0</pose>
+          <mass>47.874</mass>
+          <inertia>
+            <ixx>0.774382</ixx>
+            <ixy>-1.03799e-10</ixy>
+            <ixz>0.00765254</ixz>
+            <iyy>1.64946</iyy>
+            <iyz>1.09883e-12</iyz>
+            <izz>2.12416</izz>
+          </inertia>
+        </inertial>
+        <collision name='base_link_collision'>
+          <pose>0 0 0 1.5708 -0 3.14</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/el-fander/catkin_ws/src/mobile_manipulator_body/meshes/robot_base.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__imu_link_collision_1'>
+          <pose>-0.35 0 0.115 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.001 0.001 0.001</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <collision name='base_link_fixed_joint_lump__laser_link_collision_2'>
+          <pose>-0.3 0 0.255 0 0 -3</pose>
+          <geometry>
+            <box>
+              <size>0.1 0.1 0.1</size>
+            </box>
+          </geometry>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <friction>
+              <ode/>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='base_link_visual'>
+          <pose>0 0 0 1.5708 -0 3.14</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/el-fander/catkin_ws/src/mobile_manipulator_body/meshes/robot_base.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__imu_link_visual_1'>
+          <pose>-0.35 0 0.115 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.001 0.001 0.001</size>
+            </box>
+          </geometry>
+        </visual>
+        <visual name='base_link_fixed_joint_lump__laser_link_visual_2'>
+          <pose>-0.26238 0.005363 0.155 0 0 -1.5</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/el-fander/catkin_ws/src/mobile_manipulator_body/meshes/test/Pact.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <gravity>1</gravity>
+        <sensor name='imu_sensor' type='imu'>
+          <always_on>1</always_on>
+          <update_rate>100</update_rate>
+          <visualize>1</visualize>
+          <topic>__default_topic__</topic>
+          <plugin name='imu_plugin' filename='libgazebo_ros_imu_sensor.so'>
+            <topicName>imu_data</topicName>
+            <bodyName>imu_link</bodyName>
+            <updateRateHZ>10.0</updateRateHZ>
+            <gaussianNoise>0.0</gaussianNoise>
+            <xyzOffset>0 0 0</xyzOffset>
+            <rpyOffset>0 0 0</rpyOffset>
+            <frameName>imu_link</frameName>
+            <initialOrientationAsReference>0</initialOrientationAsReference>
+            <robotNamespace>/</robotNamespace>
+          </plugin>
+          <pose>-0.35 0 0.115 0 -0 0</pose>
+          <imu/>
+        </sensor>
+        <sensor name='laser' type='ray'>
+          <visualize>1</visualize>
+          <update_rate>30</update_rate>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>32</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.535292</min_angle>
+                <max_angle>0.186227</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>1</samples>
+                <min_angle>0</min_angle>
+                <max_angle>0</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.1</min>
+              <max>30</max>
+              <resolution>0.01</resolution>
+            </range>
+          </ray>
+          <plugin name='gazebo_ros_head_hokuyo_controller' filename='libgazebo_ros_laser.so'>
+            <topicName>/scan</topicName>
+            <frameName>laser_link</frameName>
+            <robotNamespace>/</robotNamespace>
+          </plugin>
+          <pose>-0.3 0 0.255 0 0 -3</pose>
+        </sensor>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='arm_base_joint' type='revolute'>
+        <pose relative_to='base_link'>0.2 0 0.145 0 -0 0</pose>
+        <parent>base_link</parent>
+        <child>arm_base</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='arm_base'>
+        <pose relative_to='arm_base_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0 -0.063005 -0 0 -0 0</pose>
+          <mass>1.6004</mass>
+          <inertia>
+            <ixx>0.00552197</ixx>
+            <ixy>7.95506e-10</ixy>
+            <ixz>-1.34378e-09</ixz>
+            <iyy>0.00352397</iyy>
+            <iyz>-1.10072e-08</iyz>
+            <izz>0.0055374</izz>
+          </inertia>
+        </inertial>
+        <collision name='arm_base_collision'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/el-fander/catkin_ws/src/mobile_manipulator_body/meshes/arm_base.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='arm_base_visual'>
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/el-fander/catkin_ws/src/mobile_manipulator_body/meshes/arm_base.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='shoulder_joint' type='revolute'>
+        <pose relative_to='arm_base'>-0.05166 0 0.20271 0 -0 1.5708</pose>
+        <parent>arm_base</parent>
+        <child>bicep</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='bicep'>
+        <pose relative_to='shoulder_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0.12821 4e-06 0.052492 0 -0 0</pose>
+          <mass>1.1198</mass>
+          <inertia>
+            <ixx>0.0012474</ixx>
+            <ixy>-5.4004e-07</ixy>
+            <ixz>-0.0013148</ixz>
+            <iyy>0.0072923</iyy>
+            <iyz>-1.8586e-07</iyz>
+            <izz>0.0068178</izz>
+          </inertia>
+        </inertial>
+        <collision name='bicep_collision'>
+          <pose>0 0 0 3.14159 -1.57079 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/el-fander/catkin_ws/src/mobile_manipulator_body/meshes/bicep.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='bicep_visual'>
+          <pose>0 0 0 3.14159 -1.57079 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/el-fander/catkin_ws/src/mobile_manipulator_body/meshes/bicep.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='bottom_wrist_joint' type='revolute'>
+        <pose relative_to='bicep'>0 -0.05194 0.269 0 -0 0</pose>
+        <parent>bicep</parent>
+        <child>bottom_wrist</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='bottom_wrist'>
+        <pose relative_to='bottom_wrist_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>-0 -0.069257 -0 0 -0 0</pose>
+          <mass>0.27721</mass>
+          <inertia>
+            <ixx>0.00104291</ixx>
+            <ixy>4.37155e-09</ixy>
+            <ixz>-2.4505e-09</ixz>
+            <iyy>0.000380518</iyy>
+            <iyz>-7.5601e-09</iyz>
+            <izz>0.00106007</izz>
+          </inertia>
+        </inertial>
+        <collision name='bottom_wrist_collision'>
+          <pose>0 0 0.13522 3.14 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/el-fander/catkin_ws/src/mobile_manipulator_body/meshes/wrist.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='bottom_wrist_visual'>
+          <pose>0 0 0.13522 3.14 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/el-fander/catkin_ws/src/mobile_manipulator_body/meshes/wrist.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='elbow_joint' type='revolute'>
+        <pose relative_to='bottom_wrist'>0 0 0.13522 0 -0 0</pose>
+        <parent>bottom_wrist</parent>
+        <child>elbow</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='elbow'>
+        <pose relative_to='elbow_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>-0.11109 0 0.046469 0 -0 0</pose>
+          <mass>0.84845</mass>
+          <inertia>
+            <ixx>0.00079656</ixx>
+            <ixy>-7.8011e-10</ixy>
+            <ixz>0.00053616</ixz>
+            <iyy>0.003576</iyy>
+            <iyz>4.6326e-10</iyz>
+            <izz>0.0033698</izz>
+          </inertia>
+        </inertial>
+        <collision name='elbow_collision'>
+          <pose>0 0.05163 0.20994 3.14159 -1.57079 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/el-fander/catkin_ws/src/mobile_manipulator_body/meshes/elbow.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='elbow_visual'>
+          <pose>0 0.05163 0.20994 3.14159 -1.57079 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/el-fander/catkin_ws/src/mobile_manipulator_body/meshes/elbow.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='top_wrist_joint' type='revolute'>
+        <pose relative_to='elbow'>0 0 0.20994 0 -0 0</pose>
+        <parent>elbow</parent>
+        <child>top_wrist</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='top_wrist'>
+        <pose relative_to='top_wrist_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>-0 -0.069257 -0 0 -0 0</pose>
+          <mass>0.27721</mass>
+          <inertia>
+            <ixx>0.00104291</ixx>
+            <ixy>4.37155e-09</ixy>
+            <ixz>-2.4505e-09</ixz>
+            <iyy>0.000380518</iyy>
+            <iyz>-7.5601e-09</iyz>
+            <izz>0.00106007</izz>
+          </inertia>
+        </inertial>
+        <collision name='top_wrist_collision'>
+          <pose>0 0 0.13522 3.14 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/el-fander/catkin_ws/src/mobile_manipulator_body/meshes/wrist.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='top_wrist_visual'>
+          <pose>0 0 0.13522 3.14 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/el-fander/catkin_ws/src/mobile_manipulator_body/meshes/wrist.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='front_left_wheel_joint' type='revolute'>
+        <pose relative_to='base_link'>0.22 0.25 0 0 -0 0</pose>
+        <parent>base_link</parent>
+        <child>front_left_wheel</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='front_left_wheel'>
+        <pose relative_to='front_left_wheel_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>-0 0.006809 -0 0 -0 0</pose>
+          <mass>2.6578</mass>
+          <inertia>
+            <ixx>0.00856503</ixx>
+            <ixy>1.50741e-19</ixy>
+            <ixz>-4.7815e-19</ixz>
+            <iyy>0.0136706</iyy>
+            <iyz>-2.68136e-19</iyz>
+            <izz>0.00856503</izz>
+          </inertia>
+        </inertial>
+        <collision name='front_left_wheel_collision'>
+          <pose>0 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/el-fander/catkin_ws/src/mobile_manipulator_body/meshes/wheel.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+              </ode>
+            </contact>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>1 0 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='front_left_wheel_visual'>
+          <pose>0 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/el-fander/catkin_ws/src/mobile_manipulator_body/meshes/wheel.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='front_right_wheel_joint' type='revolute'>
+        <pose relative_to='base_link'>0.22 -0.25 0 0 -0 0</pose>
+        <parent>base_link</parent>
+        <child>front_right_wheel</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='front_right_wheel'>
+        <pose relative_to='front_right_wheel_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>-0 0.006809 -0 0 -0 0</pose>
+          <mass>2.6578</mass>
+          <inertia>
+            <ixx>0.00856503</ixx>
+            <ixy>1.50741e-19</ixy>
+            <ixz>-4.7815e-19</ixz>
+            <iyy>0.0136706</iyy>
+            <iyz>-2.68136e-19</iyz>
+            <izz>0.00856503</izz>
+          </inertia>
+        </inertial>
+        <collision name='front_right_wheel_collision'>
+          <pose>0 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/el-fander/catkin_ws/src/mobile_manipulator_body/meshes/wheel.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+              </ode>
+            </contact>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>1 0 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='front_right_wheel_visual'>
+          <pose>0 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/el-fander/catkin_ws/src/mobile_manipulator_body/meshes/wheel.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='rear_left_wheel_joint' type='revolute'>
+        <pose relative_to='base_link'>-0.22 0.25 0 0 -0 0</pose>
+        <parent>base_link</parent>
+        <child>rear_left_wheel</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='rear_left_wheel'>
+        <pose relative_to='rear_left_wheel_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>-0 0.006809 -0 0 -0 0</pose>
+          <mass>2.6578</mass>
+          <inertia>
+            <ixx>0.00856503</ixx>
+            <ixy>1.50741e-19</ixy>
+            <ixz>-4.7815e-19</ixz>
+            <iyy>0.0136706</iyy>
+            <iyz>-2.68136e-19</iyz>
+            <izz>0.00856503</izz>
+          </inertia>
+        </inertial>
+        <collision name='rear_left_wheel_collision'>
+          <pose>0 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/el-fander/catkin_ws/src/mobile_manipulator_body/meshes/wheel.stl</uri>
+            </mesh>
+          </geometry>
+          <surface>
+            <contact>
+              <ode>
+                <kp>1e+07</kp>
+                <kd>1</kd>
+              </ode>
+            </contact>
+            <friction>
+              <ode>
+                <mu>1</mu>
+                <mu2>1</mu2>
+                <fdir1>1 0 0</fdir1>
+              </ode>
+              <torsional>
+                <ode/>
+              </torsional>
+            </friction>
+            <bounce/>
+          </surface>
+          <max_contacts>10</max_contacts>
+        </collision>
+        <visual name='rear_left_wheel_visual'>
+          <pose>0 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/el-fander/catkin_ws/src/mobile_manipulator_body/meshes/wheel.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='rear_right_wheel_joint' type='revolute'>
+        <pose relative_to='base_link'>-0.22 -0.25 0 0 -0 0</pose>
+        <parent>base_link</parent>
+        <child>rear_right_wheel</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name='rear_right_wheel'>
+        <pose relative_to='rear_right_wheel_joint'>0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>-0 0.006809 -0 0 -0 0</pose>
+          <mass>2.6578</mass>
+          <inertia>
+            <ixx>0.00856503</ixx>
+            <ixy>1.50741e-19</ixy>
+            <ixz>-4.7815e-19</ixz>
+            <iyy>0.0136706</iyy>
+            <iyz>-2.68136e-19</iyz>
+            <izz>0.00856503</izz>
+          </inertia>
+        </inertial>
+        <collision name='rear_right_wheel_collision'>
+          <pose>0 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/el-fander/catkin_ws/src/mobile_manipulator_body/meshes/wheel.stl</uri>
+            </mesh>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='rear_right_wheel_visual'>
+          <pose>0 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>/home/el-fander/catkin_ws/src/mobile_manipulator_body/meshes/wheel.stl</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <plugin name='gazebo_ros_control' filename='libgazebo_ros_control.so'>
+        <robotNamespace>/</robotNamespace>
+        <controlPeriod>0.001</controlPeriod>
+        <legacyModeNS>0</legacyModeNS>
+      </plugin>
+      <plugin name='joint_state_publisher' filename='libgazebo_ros_joint_state_publisher.so'>
+        <jointName>arm_base_joint, shoulder_joint, bottom_wrist_joint, elbow_joint, bottom_wrist_joint</jointName>
+        <robotNamespace>/</robotNamespace>
+      </plugin>
+      <static>0</static>
+      <plugin name='diff_drive_controller' filename='libgazebo_ros_diff_drive.so'>
+        <legacyMode>0</legacyMode>
+        <alwaysOn>1</alwaysOn>
+        <updateRate>1000.0</updateRate>
+        <leftJoint>front_left_wheel_joint, rear_left_wheel_joint</leftJoint>
+        <rightJoint>front_right_wheel_joint, rear_right_wheel_joint</rightJoint>
+        <wheelSeparation>0.5</wheelSeparation>
+        <wheelDiameter>0.2</wheelDiameter>
+        <wheelTorque>10</wheelTorque>
+        <publishTf>1</publishTf>
+        <odometryFrame>map</odometryFrame>
+        <commandTopic>cmd_vel</commandTopic>
+        <odometryTopic>odom</odometryTopic>
+        <robotBaseFrame>base_link</robotBaseFrame>
+        <wheelAcceleration>2.8</wheelAcceleration>
+        <publishWheelJointState>1</publishWheelJointState>
+        <publishWheelTF>0</publishWheelTF>
+        <odometrySource>world</odometrySource>
+        <rosDebugLevel>Debug</rosDebugLevel>
+        <robotNamespace>/</robotNamespace>
+      </plugin>
+      <pose>0 0 0 0 -0 0</pose>
+    </model>
+    <model name='velodyne_hdl-32'>
+      <link name='base'>
+        <pose>0 0 0.029335 0 -0 0</pose>
+        <inertial>
+          <mass>1.2</mass>
+          <inertia>
+            <ixx>0.00108747</ixx>
+            <iyy>0.00108747</iyy>
+            <izz>0.00109244</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <pose>0 0 0.029335 0 -0 0</pose>
+        <collision name='base_collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.04267</radius>
+              <length>0.05867</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='base_visual'>
+          <pose>0 0 -0.029335 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://velodyne_hdl32/meshes/velodyne_base.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <link name='top'>
+        <sensor name='sensor' type='ray'>
+          <pose>0 0 -0.004645 1.5707 -0 0</pose>
+          <visualize>1</visualize>
+          <update_rate>30</update_rate>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>32</samples>
+                <resolution>1</resolution>
+                <min_angle>-0.535292</min_angle>
+                <max_angle>0.186227</max_angle>
+              </horizontal>
+              <vertical>
+                <samples>1</samples>
+                <min_angle>0</min_angle>
+                <max_angle>0</max_angle>
+              </vertical>
+            </scan>
+            <range>
+              <min>0.05</min>
+              <max>70</max>
+              <resolution>0.02</resolution>
+            </range>
+          </ray>
+        </sensor>
+        <pose>0 0 0.095455 0 -0 0</pose>
+        <inertial>
+          <mass>0.1</mass>
+          <inertia>
+            <ixx>9.0623e-05</ixx>
+            <iyy>9.0623e-05</iyy>
+            <izz>9.1036e-05</izz>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyz>0</iyz>
+          </inertia>
+          <pose>0 0 0 0 -0 0</pose>
+        </inertial>
+        <pose>0 0 0.095455 0 -0 0</pose>
+        <collision name='top_collision'>
+          <geometry>
+            <cylinder>
+              <radius>0.04267</radius>
+              <length>0.07357</length>
+            </cylinder>
+          </geometry>
+          <max_contacts>10</max_contacts>
+          <surface>
+            <contact>
+              <ode/>
+            </contact>
+            <bounce/>
+            <friction>
+              <torsional>
+                <ode/>
+              </torsional>
+              <ode/>
+            </friction>
+          </surface>
+        </collision>
+        <visual name='top_visual'>
+          <pose>0 0 -0.037679 0 -0 1.5707</pose>
+          <geometry>
+            <mesh>
+              <uri>model://velodyne_hdl32/meshes/velodyne_top.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <self_collide>0</self_collide>
+        <enable_wind>0</enable_wind>
+        <kinematic>0</kinematic>
+      </link>
+      <joint name='joint' type='revolute'>
+        <pose>0 0 -0.036785 0 -0 0</pose>
+        <parent>base</parent>
+        <child>top</child>
+        <axis>
+          <xyz>0 0 1</xyz>
+          <limit>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <pose>0 -1 0 0 -0 0</pose>
+    </model>
+    <state world_name='default'>
+      <sim_time>78 386000000</sim_time>
+      <real_time>87 456003505</real_time>
+      <wall_time>1656006324 905840395</wall_time>
+      <iterations>78386</iterations>
+      <model name='ground_plane'>
+        <pose>0 0 0 0 -0 0</pose>
+        <scale>1 1 1</scale>
+        <link name='link'>
+          <pose>0 0 0 0 -0 0</pose>
+          <velocity>0 0 0 0 -0 0</velocity>
+          <acceleration>0 0 0 0 -0 0</acceleration>
+          <wrench>0 0 0 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='mobile_manipulator'>
+        <pose>-0.018786 0.018708 0.099803 -1.4e-05 0.000668 0.070568</pose>
+        <scale>1 1 1</scale>
+        <link name='arm_base'>
+          <pose>0.180812 0.032819 0.24467 -4e-06 0.000656 0.091411</pose>
+          <velocity>0.000822 0.003291 0.00108 -0.015127 0.002407 0.029431</velocity>
+          <acceleration>5.39751 7.1464 6.86871 -0.657661 -0.620887 -1.61233</acceleration>
+          <wrench>8.63817 11.4371 10.9927 0 -0 0</wrench>
+        </link>
+        <link name='base_link'>
+          <pose>-0.018786 0.018708 0.099803 -1.4e-05 0.000668 0.070568</pose>
+          <velocity>-0.000682 0.0001 0.003601 -0.016137 0.01123 0.004326</velocity>
+          <acceleration>-0.02513 2.03432 10.4615 2.4113 -0.079319 0.88585</acceleration>
+          <wrench>-1.20307 97.3913 500.836 0 -0 0</wrench>
+        </link>
+        <link name='bicep'>
+          <pose>0.129502 0.028116 0.447414 0.000637 0.016793 1.66221</pose>
+          <velocity>0.003049 0.004912 0.0016 0.013782 -0.011359 0.02382</velocity>
+          <acceleration>1.05896 9.97488 8.49355 -0.928419 -0.514899 -0.5197</acceleration>
+          <wrench>1.18582 11.1699 9.51108 0 -0 0</wrench>
+        </link>
+        <link name='bottom_wrist'>
+          <pose>0.180985 0.037371 0.716342 0.000626 -0.084349 1.66215</pose>
+          <velocity>0.00267 0.00282 0.00167 0.014242 -0.01774 0.023193</velocity>
+          <acceleration>7.22411 11.3218 8.62561 2.07531 -1.53263 0.815102</acceleration>
+          <wrench>2.0026 3.13852 2.39111 0 -0 0</wrench>
+        </link>
+        <link name='elbow'>
+          <pose>0.18211 0.026035 0.851081 0.002258 -0.084316 1.6428</pose>
+          <velocity>0.001351 0.001115 0.001768 0.013163 -0.015668 -0.023822</velocity>
+          <acceleration>-0.497149 2.00027 2.18156 -2.39689 0.49228 2.92917</acceleration>
+          <wrench>-0.421806 1.69713 1.85095 0 -0 0</wrench>
+        </link>
+        <link name='front_left_wheel'>
+          <pose>0.183038 0.283597 0.099653 -1.9e-05 9e-06 0.070704</pose>
+          <velocity>-0.001853 0.001149 -0.002999 -0.01153 -0.018596 -3e-06</velocity>
+          <acceleration>-3.36561 1.95821 -5.03107 2.70933 -0.83087 -1.73404</acceleration>
+          <wrench>-8.94512 5.20453 -13.3716 0 -0 0</wrench>
+        </link>
+        <link name='front_right_wheel'>
+          <pose>0.218293 -0.215157 0.09966 -6e-06 -0.000354 0.070566</pose>
+          <velocity>0.000334 0.001289 0.004856 -0.012912 0.003491 0.000349</velocity>
+          <acceleration>0.219042 1.86194 13.0157 2.96473 0.566323 -0.175164</acceleration>
+          <wrench>0.582169 4.94867 34.5932 0 -0 0</wrench>
+        </link>
+        <link name='rear_left_wheel'>
+          <pose>-0.255866 0.252574 0.099947 -1.4e-05 -0.043528 0.070569</pose>
+          <velocity>-0.001677 -0.000909 0.002541 -0.013445 -0.024366 0.004266</velocity>
+          <acceleration>-3.10882 -1.65986 7.85305 -2.29851 0.219235 0.759299</acceleration>
+          <wrench>-8.26263 -4.41159 20.8718 0 -0 0</wrench>
+        </link>
+        <link name='rear_right_wheel'>
+          <pose>-0.220611 -0.246181 0.099954 1.2e-05 -0.052393 0.070565</pose>
+          <velocity>0.000457 -0.00064 0.010256 0.006406 0.004707 0.000446</velocity>
+          <acceleration>0.429569 -1.21958 25.7875 -0.060781 0.054472 -0.162851</acceleration>
+          <wrench>1.14171 -3.24141 68.538 0 -0 0</wrench>
+        </link>
+        <link name='top_wrist'>
+          <pose>0.183854 0.008435 1.06027 0.002285 0.180786 1.6434</pose>
+          <velocity>-0.002279 -0.001697 0.001535 -0.007672 -0.017505 -0.024085</velocity>
+          <acceleration>-1.65165 -6.9618 8.00065 -1.61018 0.730406 -1.38252</acceleration>
+          <wrench>-0.457855 -1.92988 2.21786 0 -0 0</wrench>
+        </link>
+      </model>
+      <model name='velodyne_hdl-32'>
+        <pose>-0 -1 -1e-06 2e-06 7e-06 0</pose>
+        <scale>1 1 1</scale>
+        <link name='base'>
+          <pose>0 -1 0.029334 2e-06 7e-06 0</pose>
+          <velocity>0.000192 -7e-05 -0.000715 0.002377 0.006552 0</velocity>
+          <acceleration>-0 -0 -9.8 0 -4e-06 0</acceleration>
+          <wrench>-0 -0 -11.76 0 -0 0</wrench>
+        </link>
+        <link name='top'>
+          <pose>1e-06 -1 0.095454 2e-06 7e-06 0</pose>
+          <velocity>0.000625 -0.000227 -0.000715 0.002377 0.006552 0</velocity>
+          <acceleration>1e-06 0 -9.8 1e-06 -1e-05 0</acceleration>
+          <wrench>0 0 -0.98 0 -0 0</wrench>
+        </link>
+      </model>
+      <light name='sun'>
+        <pose>0 0 10 0 -0 0</pose>
+      </light>
+    </state>
+    <gui fullscreen='0'>
+      <camera name='user_camera'>
+        <pose>6.35553 -7.84496 3.32134 0 0.379643 2.37619</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+  </world>
+</sdf>
